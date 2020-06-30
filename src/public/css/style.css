@@ -1,0 +1,17 @@
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --AZUL: #164053;
+}
+
+body{
+    background: #FAFAFA;
+}
+
+.btnAzul{
+    background: var(--AZUL);
+    color: white;
+    border: none;
+}

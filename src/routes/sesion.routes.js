@@ -1,6 +1,8 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const routes = express.Router();
 const { controllerLogin } = require('../controllers/login.controller');
+const { PRIVATE_KEY } = require('../config/index.config');
 
 routes
     .post('/login', async (req, res) => {
@@ -12,9 +14,9 @@ routes
         const ResultAuth = await controllerLogin(user, pass, res);
         console.log(ResultAuth);
         if(ResultAuth){
-            res.status(200).json({
-                auth: true
-            });
+            const token = jwt.sign({user, pass}, PRIVATE_KEY);
+            req.session.token = 'Token-Privado ' + token;
+            res.status(201).redirect('/inicio');
         } else {
             res.redirect('/?err=err');
         }

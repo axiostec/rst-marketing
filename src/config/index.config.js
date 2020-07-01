@@ -9,5 +9,7 @@ module.exports = {
     HOST_DB: process.env.HOST_DB,
     HOST_USER: process.env.HOST_USER,
     HOST_PASS: process.env.HOST_PASS,
-    HOST_NAME_DB: process.env.HOST_NAME_DB
+    HOST_NAME_DB: process.env.HOST_NAME_DB,
+    PRIVATE_KEY: process.env.PRIVATE_KEY,
+    PRIVATE_KEY_SESSION: process.env.PRIVATE_KEY_SESSION
 }

@@ -1,2 +1,3 @@
 # rst-marketing
-desarrollo para rst marketing
+
+Desarrollo de aplicación para RST Marketing

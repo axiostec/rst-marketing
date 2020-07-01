@@ -4,6 +4,7 @@
 
 :root{
     --AZUL: #164053;
+    --AZUL-CLARO: #C3E9FA;
 }
 
 body{
@@ -12,6 +13,12 @@ body{
 
 .btnAzul{
     background: var(--AZUL);
+    color: white;
+    border: none;
+}
+
+.btnAzulClaro{
+    background: var(--AZUL-CLARO);
     color: white;
     border: none;
 }

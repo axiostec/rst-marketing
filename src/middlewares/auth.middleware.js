@@ -21,5 +21,24 @@ module.exports = {
         } else {
             next();
         }
+    },
+    AuthNoVerify: (req, res, next) => {
+        if(req.path === '/' || req.path === '/login'){
+            if(req.session.token){
+                const token = req.session.token.split(' ')[1];
+                jwt.verify(token, PRIVATE_KEY, (err, verify) => {
+                    if(err) {
+                        return res.status(403).redirect('/');
+                    }
+                    if(verify){
+                        res.status(200).redirect('/inicio');
+                    }
+                });
+            } else {
+                next();
+            }
+        } else {
+            next();
+        }
     }
 }

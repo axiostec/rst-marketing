@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
 const routes = express.Router();
+const { AuthNoVerify }  = require('../middlewares/auth.middleware');
 
 routes
-    .get('/', (req, res) => {
+    .get('/', AuthNoVerify, (req, res) => {
         res.status(200).sendFile(path.join(__dirname, '../views/login.html'));
     })
     .get('/inicio', (req, res) => {

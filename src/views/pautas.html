@@ -14,8 +14,13 @@
 </head>
 
 <body class="w-100 h-100 d-flex justify-content-center align-items-center">
+    <div class="w-100 d-flex justify-content-center position-fixed" style="top: 0; left: 0;">
+        <div style="width: 10rem;">
+            <img src="./img/logo.jpeg" alt="logo rst marketing" class="img-fluid">
+        </div>
+    </div>
     <div class="position-fixed" style="right: 10px; top: 10px;">
-        <button class="btn btnAzulClaro d-flex justify-content-center align-items-center"
+        <button onclick="cerrarSesion()" class="btn btnAzulClaro d-flex justify-content-center align-items-center"
             style="width: 50px; height: 50px; border-radius: 10px;">
             <img src="./img/logout.png" alt="boton spotify" class="img-fluid">
         </button>
@@ -68,6 +73,7 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
     <script src="./js/controller/alert.login.js"></script>
+    <script src="./js/controller/logout.controller.js"></script>
 </body>
 
 </html>

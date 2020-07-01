@@ -1,11 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const routes = express.Router();
+const { AuthNoVerify }  = require('../middlewares/auth.middleware');
 const { controllerLogin } = require('../controllers/login.controller');
 const { PRIVATE_KEY } = require('../config/index.config');
 
 routes
-    .post('/login', async (req, res) => {
+    .post('/login', AuthNoVerify, async (req, res) => {
         console.log('/login(POST)');
         const {
             user,

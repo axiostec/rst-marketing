@@ -12,10 +12,12 @@ routes
             user,
             pass
         } = req.body;
-        const ResultAuth = await controllerLogin(user, pass, res);
-        console.log(ResultAuth);
-        if(ResultAuth){
-            const token = jwt.sign({user, pass}, PRIVATE_KEY);
+        const {
+            auth,
+            id_user
+        } = await controllerLogin(user, pass, res);
+        if(auth){
+            const token = jwt.sign({id_user, user, pass}, PRIVATE_KEY);
             req.session.token = 'Token-Privado ' + token;
             res.status(201).redirect('/inicio');
         } else {

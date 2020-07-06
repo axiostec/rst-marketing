@@ -4,6 +4,7 @@ const pool = require('../config/db.config');
 const jwt = require('jsonwebtoken');
 const uniq = require('uniqid');
 const fs = require('fs');
+const mediaserver = require('mediaserver');
 const routes = express.Router();
 const { AuthNoVerify, AuthVerify }  = require('../middlewares/auth.middleware');
 const { PRIVATE_KEY } = require('../config/index.config');
@@ -14,7 +15,7 @@ routes
         const token = req.session.token.split(' ')[1];
         try{
             const userDecoded = jwt.verify(token, PRIVATE_KEY);
-            pool.query(`SELECT * FROM pautas WHERE id_cliente=${userDecoded.id_user}`, (err, result) => {
+            pool.query(`SELECT * FROM pautas WHERE id_cliente=${userDecoded.id_user} ORDER BY fecha DESC`, (err, result) => {
                 if(err){
                     return res.json({error: err});
                 }
@@ -81,6 +82,16 @@ routes
         }catch(err){
             res.status(500).redirect('/');
         }
+    })
+    .get('/play/pauta/:id', AuthVerify, async (req, res) => {
+        const idPlau = req.params.id;
+        const token = req.session.token.split(' ')[1];
+        const userDecode = jwt.verify(token, PRIVATE_KEY);
+        const infoPauta = {
+            id_cliente: userDecode.id_user,
+        }
+        const pauta = await pool.query(`SELECT * FROM pautas WHERE id=${idPlau} AND id_cliente='${infoPauta.id_cliente}'`);
+        mediaserver.pipe(req, res, pauta[0].ruta);
     });
 
 module.exports = routes;

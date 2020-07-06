@@ -52,20 +52,6 @@
         </button>
     </div>
     <div class="position-fixed w-100 " style="bottom: 0; left: 0;">
-        <div class="w-100 bg-white d-flex justify-content-center align-items-center" style="height: 58px;">
-            <a href="/inicio" class="btn btnAzulClaro d-flex justify-content-center align-items-center"
-                style="width: 50px; height: 50px; border-radius: 10px;">
-                <img src="./img/spotify.png" alt="boton spotify" class="img-fluid">
-            </a>
-            <a href="/pautas" class="btn mx-3 btnAzulClaro d-flex justify-content-center align-items-center"
-                style="width: 50px; height: 50px; border-radius: 10px;">
-                <img src="./img/megaphone.png" alt="boton spotify" class="img-fluid">
-            </a>
-            <a href="/configuracion" class="btn btnAzulClaro d-flex justify-content-center align-items-center"
-                style="width: 50px; height: 50px; border-radius: 10px;">
-                <img src="./img/automation.png" alt="boton spotify" class="img-fluid">
-            </a>
-        </div>
         <div class="w-100 bg-dark d-flex align-items-center justify-content-center" style="height: 58px;">
             <div
                 style="min-width: 50px; max-width: 50px; width: 50px; height: 50px; overflow: hidden; border-radius: 10px;">
@@ -86,6 +72,7 @@
                 <button class="btn p-2">
                     <i class="fas fa-forward text-light"></i>
                 </button>
+                <audio id="reproductor" class="d-none" autoplay></audio>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+const player = document.getElementById('reproductor');
 const contPautas = document.getElementById('contPautas');
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -43,4 +44,20 @@ const Pautas = {
     }
 }
 
+const Reproductor = {
+    addSource: (srcPlay) => {
+        console.log(srcPlay);
+        if(srcPlay){
+            player.src = `/play/pauta/${srcPlay[0].id}`;
+            player.play();
+        }
+    }
+}
+
+async function addSourceMusic(){
+    const src = await Pautas.getPautas();
+    Reproductor.addSource(src);
+}
+
 Pautas.renderPautas();
+addSourceMusic();

@@ -1,6 +1,15 @@
 const player = document.getElementById('reproductor');
 const contPautas = document.getElementById('contPautas');
+const renderizadorTiempo = document.getElementById('mostrarTiempo');
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+let IntervaloTiempo;
+let minutos = 1;
+let contadorPautas = 0;
+let tiempoPautas = minutos * 1000;
+let pautasAleatoria = [];
+
+document.querySelectorAll('.controlSonido')[0].disabled = true;
+document.querySelectorAll('.controlSonido')[1].disabled = true;
 
 const Pautas = {
     getPautas: async () => {
@@ -29,8 +38,9 @@ const Pautas = {
                             <p class="m-0">${pauta.fecha.split('T')[1].split('.')[0]}</p>
                         </div>
                         <div class="d-flex">
-                            <a href="/delete/${pauta.id}" class="btn mr-2"><i style="color: var(--AZUL);" class="fas fa-trash fa-2x"></i></a>
-                            <button class="btn"><i style="color: var(--AZUL);" class="fas fa-play fa-2x"></i></button>
+                            <a href="/delete/${pauta.id}" class="btn mr-2 d-flex align-items-center"><i style="color: var(--AZUL);" class="fas fa-trash fa-1x"></i></a>
+                            <button class="btn" onclick="detenerMusica()"><i style="color: var(--AZUL);" class="fas fa-pause fa-2x"></i></button>
+                            <button class="btn" onclick="solicitarPauta('${pauta.id}')"><i style="color: var(--AZUL);" class="fas fa-play fa-2x"></i></button>
                         </div>
                     </div>
                 `;
@@ -39,25 +49,97 @@ const Pautas = {
         } else {
             contPautas.innerHTML = '';
             contPautas.innerHTML = `<p>No hay pautas publicitarias en el servidor</p>`;
-            console.log('No hay pautas que renderizar');
         }
     }
 }
 
-const Reproductor = {
-    addSource: (srcPlay) => {
-        console.log(srcPlay);
-        if(srcPlay){
-            player.src = `/play/pauta/${srcPlay[0].id}`;
-            player.play();
-        }
+player.addEventListener('ended', () => {
+    reproductorAll();
+});
+
+async function solicitarPauta(id){
+    const cancion = await fetch(`/play/pauta/${id}`);
+    player.src = cancion.url;
+    player.play();
+}
+
+function detenerMusica(){
+    player.pause();
+}
+
+async function listaAleatoriaPautas(){
+    // traer todas las pautas publicitarias;
+    const pautas = await fetch('/get/pautas');
+    const lista = await pautas.json();
+
+    // array para guardar lista aleatoria aleatoria
+    let sonidosPautas = [];
+
+    // guardar id de pautas
+    lista.forEach( pauta => {
+        sonidosPautas.push(pauta.id);
+    })
+    
+    // generar lista aleatoria
+    sonidosPautas = sonidosPautas.sort(function() {return Math.random() - 0.5});
+    
+    pautasAleatoria = sonidosPautas;
+
+    return pautasAleatoria;
+}
+
+async function reproductorAll(){
+    document.querySelectorAll('.controlSonido')[0].disabled = false;
+    document.querySelectorAll('.controlSonido')[1].disabled = false;
+    renderTiempo();
+    console.log(pautasAleatoria.length);
+    if(pautasAleatoria.length){
+        solicitarPauta(pautasAleatoria[0]);
+    } else {
+        console.log('se acabaron las pautas traiga mas');
+        await listaAleatoriaPautas();
+    }
+    console.log('Pautas Aleatorias Orden');
+    console.log(pautasAleatoria);
+    pautasAleatoria.shift();
+}
+
+async function modTiempo(control){
+    switch (control) {
+        case 'mas':
+            document.querySelectorAll('.controlSonido')[0].disabled = true;
+            document.querySelectorAll('.controlSonido')[1].disabled = true;
+            const modificarMas = await fetch(`/config/tiempo/${control}`);
+            await renderTiempo();
+            document.querySelectorAll('.controlSonido')[0].disabled = false;
+            document.querySelectorAll('.controlSonido')[1].disabled = false;
+            break;
+        case 'menos':
+            document.querySelectorAll('.controlSonido')[0].disabled = true;
+            document.querySelectorAll('.controlSonido')[1].disabled = true;
+            const modificarMenos = await fetch(`/config/tiempo/${control}`);
+            await renderTiempo();
+            document.querySelectorAll('.controlSonido')[0].disabled = false;
+            document.querySelectorAll('.controlSonido')[1].disabled = false;
+            break;
+        default:
+            break;
     }
 }
 
-async function addSourceMusic(){
-    const src = await Pautas.getPautas();
-    Reproductor.addSource(src);
+async function renderTiempo(){
+    clearInterval(IntervaloTiempo);
+    const tiempo = await fetch('/obtener/tiempo');
+    const config = await tiempo.json();
+    minutos = config;
+    renderizadorTiempo.innerText = minutos + ' min';
+    // modificar tiempo de intervalo entre sonidos
+    IntervaloTiempo = setInterval(executeInterval, minutos * 60000);
+}
+    
+async function executeInterval(){
+    reproductorAll();
 }
 
+listaAleatoriaPautas();
 Pautas.renderPautas();
-addSourceMusic();

@@ -33,7 +33,8 @@ app.use((req, res, next) => {
 // routes
 app.use(require('./routes/index.routes'))
    .use(require('./routes/sesion.routes'))
-   .use(require('./routes/pautas.routes'));
+   .use(require('./routes/pautas.routes'))
+   .use(require('./routes/config.routes'));
 
 app.listen(PORT, () => {
     console.log(`Server On Port ${PORT}`);

@@ -11,10 +11,29 @@
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;500;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+    <link rel="shortcut icon" href="./img/logo.jpeg" type="image/x-icon">
 </head>
 
 <body class="w-100 h-100 d-flex justify-content-center flex-wrap align-items-center">
-    <div class="w-100">
+    <div class="w-100" style="z-index: 1000;">
+        <div class="w-100 mb-2">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-6 col-10 d-flex justify-content-center p-1 border align-items-center" style="border-radius: 10px;">
+                    <div>
+                        <h6 class="h6">Tiempo entre pautas:</h6>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="d-flex flex-column text-center">
+                                <button onclick="modTiempo('mas')" class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i class="fas fa-sort-up"></i></button>
+                                <h1 id="mostrarTiempo" class="h3 m-0">Init Aut</h1>
+                                <button onclick="modTiempo('menos')" class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i class="fas fa-sort-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
         <div class="w-100">
             <div class="row">
                 <div class="col"></div>
@@ -31,7 +50,20 @@
         <div class="w-100 mt-2">
             <div class="row">
                 <div class="col"></div>
-                <div class="col-10 col-md-6 p-0" style="height: 250px; overflow: scroll;">
+                <div class="col-10 col-md-6 p-0" style="height: 200px; overflow: scroll;">
+                    <div class="w-100">
+                        <div class="w-100 d-flex justify-content-around align-items-center border p-2 shadow-sm mb-2" style="border-radius: 10px;">
+                            <div class="btn btnAzulClaro d-flex justify-content-center align-items-center" style="width:50px; height: 50px; border-radius: 10px;">
+                                <img src="./img/megaphone.png" class="img-fluid">
+                            </div>
+                            <div style="width: 200px; font-size: .7em;" class="text-center">
+                                <p class="m-0">Reproduccion Automatica</p>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn" onclick="reproductorAll()"><i style="color: var(--AZUL);" class="fas fa-play fa-2x"></i></button>
+                            </div>
+                        </div>
+                    </div>
                     <div id="contPautas" class="w-100 text-center">
                         <p>No hay pautas publicitarias en el servidor</p>
                     </div>

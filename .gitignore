@@ -105,4 +105,4 @@ dist
 
 # Pautas Pub
 
-./src/audio/*
+src/audio/*

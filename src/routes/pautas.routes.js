@@ -53,17 +53,17 @@ routes
                                 return res.status(500).redirect('/');
                             }
                             console.log('pauta cargada');
-                            res.redirect('/pautas');
+                            res.redirect('/inicio');
                         });
                     }catch(err){
                         res.status(500).redirect('/');
                     }
                 });
             } else {
-                res.status(400).redirect('/pautas');
+                res.status(400).redirect('/inicio');
             }
         } else {
-            res.status(400).redirect('/pautas');
+            res.status(400).redirect('/inicio');
         }
     })
     .get('/delete/:id', AuthVerify, async (req, res) => {
@@ -78,7 +78,7 @@ routes
             const rutaPauta = infoPautaDelete[0].ruta;
             fs.unlinkSync(rutaPauta);
             await pool.query(`DELETE FROM pautas WHERE id_cliente='${infoPauta.id_cliente}' AND id='${idDelete}'`);
-            res.redirect('/pautas');
+            res.redirect('/inicio');
         }catch(err){
             res.status(500).redirect('/');
         }

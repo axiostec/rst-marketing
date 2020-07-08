@@ -53,10 +53,6 @@ const Pautas = {
     }
 }
 
-player.addEventListener('ended', () => {
-    reproductorAll();
-});
-
 async function solicitarPauta(id){
     const cancion = await fetch(`/play/pauta/${id}`);
     player.src = cancion.url;

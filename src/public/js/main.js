@@ -165,6 +165,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     let player = new Spotify.Player({
         name: 'RST AUDIO',
         getOAuthToken: callback => {
+            console.log(callback);
             token = callback;
         },
         volume: 0.8
@@ -176,7 +177,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     player.addListener('account_error', ({ message }) => { console.error(message); });
     player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-    player.addListener('ready', ({ device_id }) => {
+    player.addListener('ready', ({device_id}) => {
         console.log('Connected with Device ID', device_id);
     });
 
@@ -184,18 +185,21 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     player.addListener('player_state_changed', state => { console.log(state); });
 
     // Ready
-    player.addListener('ready', ({ device_id }) => {
+    player.addListener('ready', ({device_id}) => {
         console.log('Ready with Device ID', device_id);
     });
 
     // Not Ready
-    player.addListener('not_ready', ({ device_id }) => {
+    player.addListener('not_ready', ({device_id}) => {
         console.log('Device ID has gone offline', device_id);
     });
 
     player.connect().then(success => {
         if (success) {
           console.log('The Web Playback SDK successfully connected to Spotify!');
+          console.log(success);
         }
     });
+
 };
+

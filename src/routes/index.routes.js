@@ -8,6 +8,9 @@ routes
         res.status(200).sendFile(path.join(__dirname, '../views/login.html'));
     })
     .get('/inicio', (req, res) => {
+        if(req.query.error){
+            res.redirect('/');
+        }
         res.status(200).sendFile(path.join(__dirname, '../views/pautas.html'));
     })
     .get('/logout', (req, res) => {

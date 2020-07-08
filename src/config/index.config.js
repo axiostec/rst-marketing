@@ -11,5 +11,7 @@ module.exports = {
     HOST_PASS: process.env.HOST_PASS,
     HOST_NAME_DB: process.env.HOST_NAME_DB,
     PRIVATE_KEY: process.env.PRIVATE_KEY,
-    PRIVATE_KEY_SESSION: process.env.PRIVATE_KEY_SESSION
+    PRIVATE_KEY_SESSION: process.env.PRIVATE_KEY_SESSION,
+    CLIENT_ID: process.env.CLIENT_ID,
+    CLIENT_SECRET: process.env.CLIENT_SECRET
 }

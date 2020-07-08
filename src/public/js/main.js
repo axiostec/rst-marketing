@@ -167,10 +167,10 @@ Pautas.renderPautas();
 /* spotify */
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-  const token = 'BQBFVIpfopuCdavsIxmMhX4qAyKycdmyUo37i753MVCei0xOAf--QHg_r5MMbUp5zqPwPzVIy4Y9it3A_AelTOMJGVAQxMNo8Axxteu5QKRaHddrWe2eSp2t8fmlGWyBtUbIfWP1yDXCbJUgOShg3EaTlmmNwWOps9E_yYJMkTUQmm_Ad_8';
+  const token = 'BQAZWq6zlZ4irD_60nk8eEY08ioNK6grg22UT6S7ltnpXX51xUncEk1F3Fh_AgQHhLYf4ds63YW7QIl3arhv0ulyFsd63U-Todby2n7nWuXdrOxxNBTgL8Kd4yjLKrzRYS_MnNz8x0Uc-cCwZKDIALfsX4MLZgSNVsc9Re4Hbmb-0qpG7Ns';
   const player = new Spotify.Player({
-      name: 'RST AUDIO',
-      getOAuthToken: cb => { cb(token); }
+    name: 'RST AUDIO',
+    getOAuthToken: cb => { cb(token); }
   });
 
   // Error handling
@@ -184,20 +184,16 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
   // Ready
   player.addListener('ready', ({ device_id }) => {
-      console.log('Ready with Device ID', device_id);
+    console.log('Ready with Device ID', device_id);
   });
 
   // Not Ready
   player.addListener('not_ready', ({ device_id }) => {
-      console.log('Device ID has gone offline', device_id);
+    console.log('Device ID has gone offline', device_id);
   });
 
-  player.setVolume(volumen).then(() => {
-      console.log('Volume updated!');
-  });
-
+  player.setVolu
   // Connect to the player!
   player.connect();
-
 };
 

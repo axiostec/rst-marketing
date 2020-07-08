@@ -19,7 +19,7 @@ routes
         if(auth){
             const token = jwt.sign({id_user, user, pass}, PRIVATE_KEY);
             req.session.token = 'Token-Privado ' + token;
-            res.status(201).redirect('/inicio');
+            res.status(201).redirect('/spotify');
         } else {
             res.redirect('/?err=err');
         }

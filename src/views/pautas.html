@@ -19,14 +19,19 @@
         <div class="w-100 mb-2">
             <div class="row">
                 <div class="col"></div>
-                <div class="col-md-6 col-10 d-flex justify-content-center p-1 border align-items-center" style="border-radius: 10px;">
+                <div class="col-md-6 col-10 d-flex justify-content-center p-1 border align-items-center"
+                    style="border-radius: 10px;">
                     <div>
                         <h6 class="h6">Tiempo entre pautas:</h6>
                         <div class="d-flex align-items-center justify-content-center">
                             <div class="d-flex flex-column text-center">
-                                <button onclick="modTiempo('mas')" class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i class="fas fa-sort-up"></i></button>
+                                <button onclick="modTiempo('mas')"
+                                    class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i
+                                        class="fas fa-sort-up"></i></button>
                                 <h1 id="mostrarTiempo" class="h3 m-0">Init Aut</h1>
-                                <button onclick="modTiempo('menos')" class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i class="fas fa-sort-down"></i></button>
+                                <button onclick="modTiempo('menos')"
+                                    class="controlSonido btn btnAzul d-flex align-items-center justify-content-center"><i
+                                        class="fas fa-sort-down"></i></button>
                             </div>
                         </div>
                     </div>
@@ -37,10 +42,12 @@
         <div class="w-100">
             <div class="row">
                 <div class="col"></div>
-                <div class="col-md-6 col-10 d-flex justify-content-center p-1 border align-items-center" style="border-radius: 10px;">
+                <div class="col-md-6 col-10 d-flex justify-content-center p-1 border align-items-center"
+                    style="border-radius: 10px;">
                     <form enctype="multipart/form-data" method="POST" action="/upload/pauta" class="form-group files">
                         <label for="filePauta m-0">Subir Pauta Publicitaria</label>
-                        <input id="inputFilePauta" type="file" accept="audio/*" class="mt-3 w-100" placeholder="Pauta Pub" name="filePauta" multiple="false">
+                        <input id="inputFilePauta" type="file" accept="audio/*" class="mt-3 w-100"
+                            placeholder="Pauta Pub" name="filePauta" multiple="false">
                         <button id="btnUplaod" type="submit" class="btn btnAzul btn-block mt-2">Cargar</button>
                     </form>
                 </div>
@@ -52,15 +59,18 @@
                 <div class="col"></div>
                 <div class="col-10 col-md-6 p-0" style="height: 200px; overflow: scroll;">
                     <div class="w-100">
-                        <div class="w-100 d-flex justify-content-around align-items-center border p-2 shadow-sm mb-2" style="border-radius: 10px;">
-                            <div class="btn btnAzulClaro d-flex justify-content-center align-items-center" style="width:50px; height: 50px; border-radius: 10px;">
+                        <div class="w-100 d-flex justify-content-around align-items-center border p-2 shadow-sm mb-2"
+                            style="border-radius: 10px;">
+                            <div class="btn btnAzulClaro d-flex justify-content-center align-items-center"
+                                style="width:50px; height: 50px; border-radius: 10px;">
                                 <img src="./img/megaphone.png" class="img-fluid">
                             </div>
                             <div style="width: 200px; font-size: .7em;" class="text-center">
                                 <p class="m-0">Reproduccion Automatica</p>
                             </div>
                             <div class="d-flex">
-                                <button class="btn" onclick="reproductorAll()"><i style="color: var(--AZUL);" class="fas fa-play fa-2x"></i></button>
+                                <button class="btn" onclick="reproductorAll()"><i style="color: var(--AZUL);"
+                                        class="fas fa-play fa-2x"></i></button>
                             </div>
                         </div>
                     </div>
@@ -85,7 +95,6 @@
     </div>
     <div class="position-fixed w-100 " style="bottom: 0; left: 0;">
         <audio src="" id="reproductor" class="d-none"></audio>
-        <iframe style="position: absolute; bottom: 0; left: 0; overflow-y: scroll;" src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWU6Rfto8Ppm" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

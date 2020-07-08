@@ -168,36 +168,36 @@ Pautas.renderPautas();
 
 window.onSpotifyWebPlaybackSDKReady = () => {
   const token = 'BQBFVIpfopuCdavsIxmMhX4qAyKycdmyUo37i753MVCei0xOAf--QHg_r5MMbUp5zqPwPzVIy4Y9it3A_AelTOMJGVAQxMNo8Axxteu5QKRaHddrWe2eSp2t8fmlGWyBtUbIfWP1yDXCbJUgOShg3EaTlmmNwWOps9E_yYJMkTUQmm_Ad_8';
-  const spotify = new Spotify.Player({
+  const player = new Spotify.Player({
       name: 'RST AUDIO',
       getOAuthToken: cb => { cb(token); }
   });
 
   // Error handling
-  spotify.addListener('initialization_error', ({ message }) => { console.error(message); });
-  spotify.addListener('authentication_error', ({ message }) => { console.error(message); });
-  spotify.addListener('account_error', ({ message }) => { console.error(message); });
-  spotify.addListener('playback_error', ({ message }) => { console.error(message); });
+  player.addListener('initialization_error', ({ message }) => { console.error(message); });
+  player.addListener('authentication_error', ({ message }) => { console.error(message); });
+  player.addListener('account_error', ({ message }) => { console.error(message); });
+  player.addListener('playback_error', ({ message }) => { console.error(message); });
 
   // Playback status updates
-  spotify.addListener('player_state_changed', state => { console.log(state); });
+  player.addListener('player_state_changed', state => { console.log(state); });
 
   // Ready
-  spotify.addListener('ready', ({ device_id }) => {
+  player.addListener('ready', ({ device_id }) => {
       console.log('Ready with Device ID', device_id);
   });
 
   // Not Ready
-  spotify.addListener('not_ready', ({ device_id }) => {
+  player.addListener('not_ready', ({ device_id }) => {
       console.log('Device ID has gone offline', device_id);
   });
 
-  spotify.setVolume(volumen).then(() => {
+  player.setVolume(volumen).then(() => {
       console.log('Volume updated!');
   });
 
   // Connect to the player!
-  spotify.connect();
+  player.connect();
 
 };
 

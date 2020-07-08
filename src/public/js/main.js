@@ -167,7 +167,7 @@ Pautas.renderPautas();
 /* spotify */
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-  const token = 'BQCVx8Sefl9IcfNPYaf3sVrfK9cWzL8S4ow_01R2_nc75Ke8vJEbBiOeGZC277sM_CDrfNwAWkVkdPn-VZLRKr9-xMIN8FM9aDYVOP_hybW1J864qOPrWpuOq4D9TySq3tt1y4Rpnwl_78vJNTXwK3G2Kol_ucjrLuTotUgTQ2ivo1mysxE';
+  const token = 'BQAEFVCLCA_xRwEF4kcEfY9sxYoTeLLPcK8-s9HqO2Dz6Rq_0fHzFUHOqP6aO4anlThWLRL09PUEgWaEsCnYAcsDjnCxdxm23GAzzRpTAnzqxjXuhhTvqOEso4nM8eJXAO1mHp0zCpfFWgxELSTMFW_NJR-HVTAhXmwhL8eOz-Ht_S7_NF8';
   const player = new Spotify.Player({
     name: 'RST AUDIO',
     getOAuthToken: cb => { cb(token); }

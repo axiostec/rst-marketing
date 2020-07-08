@@ -7,11 +7,13 @@ const options = {
   month: "long",
   day: "numeric",
 };
+
 let IntervaloTiempo;
 let minutos = 1;
 let contadorPautas = 0;
 let tiempoPautas = minutos * 1000;
 let pautasAleatoria = [];
+let volumen = 0.7;
 
 document.querySelectorAll(".controlSonido")[0].disabled = true;
 document.querySelectorAll(".controlSonido")[1].disabled = true;
@@ -66,7 +68,12 @@ const Pautas = {
   },
 };
 
+player.addEventListener('ended', () => {
+  volumen = 1;
+});
+
 async function solicitarPauta(id) {
+  volumen = 0.5;
   const cancion = await fetch(`/play/pauta/${id}`);
   player.src = cancion.url;
   player.play();
@@ -159,47 +166,37 @@ Pautas.renderPautas();
 /* spotify */
 
 window.onSpotifyWebPlaybackSDKReady = () => {
-    let token =
-    "BQBFVIpfopuCdavsIxmMhX4qAyKycdmyUo37i753MVCei0xOAf--QHg_r5MMbUp5zqPwPzVIy4Y9it3A_AelTOMJGVAQxMNo8Axxteu5QKRaHddrWe2eSp2t8fmlGWyBtUbIfWP1yDXCbJUgOShg3EaTlmmNwWOps9E_yYJMkTUQmm_Ad_8";
-    
-    let player = new Spotify.Player({
-        name: 'RST AUDIO',
-        getOAuthToken: callback => {
-            console.log(callback);
-            token = callback;
-        },
-        volume: 0.8
-    });
+  const token = 'BQBFVIpfopuCdavsIxmMhX4qAyKycdmyUo37i753MVCei0xOAf--QHg_r5MMbUp5zqPwPzVIy4Y9it3A_AelTOMJGVAQxMNo8Axxteu5QKRaHddrWe2eSp2t8fmlGWyBtUbIfWP1yDXCbJUgOShg3EaTlmmNwWOps9E_yYJMkTUQmm_Ad_8';
+  const player = new Spotify.Player({
+      name: 'Web Playback SDK Quick Start Player',
+      getOAuthToken: cb => { cb(token); }
+  });
 
-    // Error handling
-    player.addListener('initialization_error', ({ message }) => { console.error(message); });
-    player.addListener('authentication_error', ({ message }) => { console.error(message); });
-    player.addListener('account_error', ({ message }) => { console.error(message); });
-    player.addListener('playback_error', ({ message }) => { console.error(message); });
+  // Error handling
+  player.addListener('initialization_error', ({ message }) => { console.error(message); });
+  player.addListener('authentication_error', ({ message }) => { console.error(message); });
+  player.addListener('account_error', ({ message }) => { console.error(message); });
+  player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-    player.addListener('ready', ({device_id}) => {
-        console.log('Connected with Device ID', device_id);
-    });
+  // Playback status updates
+  player.addListener('player_state_changed', state => { console.log(state); });
 
-    // Playback status updates
-    player.addListener('player_state_changed', state => { console.log(state); });
+  // Ready
+  player.addListener('ready', ({ device_id }) => {
+      console.log('Ready with Device ID', device_id);
+  });
 
-    // Ready
-    player.addListener('ready', ({device_id}) => {
-        console.log('Ready with Device ID', device_id);
-    });
+  // Not Ready
+  player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+  });
 
-    // Not Ready
-    player.addListener('not_ready', ({device_id}) => {
-        console.log('Device ID has gone offline', device_id);
-    });
+  player.setVolume(volumen).then(() => {
+      console.log('Volume updated!');
+  });
 
-    player.connect().then(success => {
-        if (success) {
-          console.log('The Web Playback SDK successfully connected to Spotify!');
-          console.log(success);
-        }
-    });
+  // Connect to the player!
+  player.connect();
 
 };
 

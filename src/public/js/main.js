@@ -90,6 +90,7 @@ async function reproductorAll(){
     renderTiempo();
     console.log(pautasAleatoria.length);
     if(pautasAleatoria.length){
+        console.log(pautasAleatoria);
         solicitarPauta(pautasAleatoria[0]);
     } else {
         console.log('se acabaron las pautas traiga mas');
